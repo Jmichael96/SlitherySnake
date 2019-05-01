@@ -52,13 +52,13 @@ function init() {
 // loads all three images for the game
 function loadImages() {
     head = new Image();
-    head.src = 'head2.png';
+    head.src = './assets/images/head2.png';
 
     ball = new Image();
-    ball.src = 'blue.png'
+    ball.src = './assets/images/blue.png'
 
     apple = new Image();
-    apple.src = 'apple2.png';
+    apple.src = './assets/images/apple2.png';
 };
 // create the sneaky snake object and at start has five joints
 function createSnake() {
