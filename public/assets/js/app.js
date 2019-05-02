@@ -9,13 +9,13 @@ let dots;
 let apple_x;
 let apple_y;
 let appleCount = 0;
+let topScore = 0;
 
 let leftDirection = false;
 let rightDirection = true;
 let upDirection = false;
 let downDirection = false;
-let inGame = true;
-let htmlApple = document.getElementById('appleCounter');
+let inGame = false;
 
 // size of the apple and dot of the snakeeee
 const DOT_SIZE = 10;
@@ -41,9 +41,12 @@ let y = new Array(ALL_DOTS);
 // gets reference to the canvas object and its context 
 // inside are functions being called to preform those tasks
 function init() {
+    // initate in game value
+    inGame = true;
     canvas = document.getElementById('snakeCanvas');
     ctx = canvas.getContext('2d');
-
+    // reinitialize score count
+    appleCount = 0;
     loadImages();
     createSnake();
     locateApple();
@@ -52,13 +55,13 @@ function init() {
 // loads all three images for the game
 function loadImages() {
     head = new Image();
-    head.src = './assets/images/head2.png';
+    head.src = '/assets/images/head2.png';
 
     ball = new Image();
-    ball.src = './assets/images/blue.png'
+    ball.src = '/assets/images/blue.png'
 
     apple = new Image();
-    apple.src = './assets/images/apple2.png';
+    apple.src = '/assets/images/apple2.png';
 };
 // create the sneaky snake object and at start has five joints
 function createSnake() {
@@ -174,11 +177,50 @@ function gameCycle() {
         doDrawing();
         updateDisplay();
         setTimeout('gameCycle()', DELAY);
+    }
+    else if(!inGame) {
+        $("#myModal").modal({
+            show: true,
+        });
+        newGame();
     };
 };
+function newSneakySnake() {
+    dots = 5;
+
+    for (let z = 0; z < dots; z++) {
+        y[z] = 200;
+        x[z] = 300;
+    };
+};
+function newGameStart() {
+    inGame = true;
+    canvas = document.getElementById('snakeCanvas');
+    ctx = canvas.getContext('2d');
+    // reinitialize score count
+    appleCount = 0;
+    loadImages();
+    newSneakySnake();
+    locateApple();
+    setTimeout('gameCycle()', DELAY);
+}
+function newGame() {
+    $('#newGame').html(`<button id="newGameBtn" data-dismiss="modal" class="btn" type="submit" >Play Again!</button>`)
+
+    $('#newGameBtn').on('click', function() {
+        newGameStart();
+    });
+}
+// displaying scores
 function updateDisplay() {
     document.getElementById('appleCount').innerText = 'Apple Score: ' + appleCount;
+
+    if(appleCount > topScore) {
+        topScore = appleCount;
+        document.getElementById('highScore').innerText = 'High Score: ' + topScore;
+    };
 }
+
 onkeydown = (e) => {
     let key = e.keyCode;
 
