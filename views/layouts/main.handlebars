@@ -15,7 +15,6 @@
     <!-- Modal -->
     <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">
-
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
@@ -26,27 +25,31 @@
                     <div class="card">
                         <div class="card-body">
                             <p class="form-title">
-                                Enter your name to submit your score!
+                                Your High Score Is <span id="modalScore"></span>.
+                                Enter Your Name And Save It!
                             </p>
-                            <form action="player" method="POST">
+                            <form action="player" id="playerForm" method="POST">
                                 <input type="text" class="form-control" id="name" name="name" placeholder="Name">
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <span id="error"></span>
+                                <div class="row">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
                             </form>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button>No Thanks I'm Done</button>
+                    <button data-dismiss="modal">No Thanks I'm Done</button>
                     <div id="newGame"></div>
                 </div>
             </div>
-
         </div>
     </div>
     {{{ body }}}
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    {{!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> --}}
     <script type="text/javascript" src="/assets/js/app.js"></script>
-    <script type="text/javascript" src="/assets/js/modal.js"></script>
+    <script type="text/javascript" src="/assets/js/post.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>

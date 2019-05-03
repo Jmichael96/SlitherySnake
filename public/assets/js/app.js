@@ -4,7 +4,7 @@ let ctx;
 let head;
 let apple;
 let ball;
-
+console.log('this is connected app.js')
 let dots;
 let apple_x;
 let apple_y;
@@ -178,10 +178,11 @@ function gameCycle() {
         updateDisplay();
         setTimeout('gameCycle()', DELAY);
     }
-    else if(!inGame) {
+    else if (!inGame) {
         $("#myModal").modal({
             show: true,
         });
+
         newGame();
     };
 };
@@ -207,7 +208,7 @@ function newGameStart() {
 function newGame() {
     $('#newGame').html(`<button id="newGameBtn" data-dismiss="modal" class="btn" type="submit" >Play Again!</button>`)
 
-    $('#newGameBtn').on('click', function() {
+    $('#newGameBtn').on('click', function () {
         newGameStart();
     });
 }
@@ -215,11 +216,12 @@ function newGame() {
 function updateDisplay() {
     document.getElementById('appleCount').innerText = 'Apple Score: ' + appleCount;
 
-    if(appleCount > topScore) {
+    if (appleCount > topScore) {
         topScore = appleCount;
         document.getElementById('highScore').innerText = 'High Score: ' + topScore;
+        document.getElementById('modalScore').innerText = topScore;
     };
-}
+};
 
 onkeydown = (e) => {
     let key = e.keyCode;
