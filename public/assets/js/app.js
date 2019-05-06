@@ -67,10 +67,10 @@ function loadImages() {
     ball.src = '/assets/images/blue.png'
 
     apple = new Image();
-    apple.src = '/assets/images/apple2.png';
+    apple.src = '/assets/images/food2.png';
 
     food = new Image();
-    food.src = '/assets/images/apple2.png';
+    food.src = '/assets/images/food.png';
 };
 // create the sneaky snake object and at start has five joints
 function createSnake() {
