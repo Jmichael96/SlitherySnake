@@ -1,4 +1,4 @@
-# SlitherySnake
+# Slithery Snake
 
 [Live Link!](https://slithery-snake96.herokuapp.com/)
 
