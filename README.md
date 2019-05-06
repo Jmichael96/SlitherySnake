@@ -1,6 +1,6 @@
 # SlitherySnake
 
-(LIVE LINK)[https://slithery-snake96.herokuapp.com/]
+[Live Link!](https://slithery-snake96.herokuapp.com/)
 
 ## Built With:
 - JavaScript
