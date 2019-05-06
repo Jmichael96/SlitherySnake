@@ -3,11 +3,15 @@ let ctx;
 
 let head;
 let apple;
+let food;
 let ball;
 console.log('this is connected app.js')
 let dots;
 let apple_x;
 let apple_y;
+let food_y;
+let food_x
+
 let appleCount = 0;
 let topScore = 0;
 
@@ -22,12 +26,13 @@ const DOT_SIZE = 10;
 // defines the maximum number of possible dots on the canvas
 const ALL_DOTS = 900;
 // used to calculate a random position for the apple
-const MAX_RAND = 50;
+const MAX_RAND = 60;
+const MAX_RAND2 = 50;
 // determines the speed of the game
 const DELAY = 90;
 // store size of the canvas
-const C_HEIGHT = 500;
-const C_WIDTH = 600;
+const C_HEIGHT = 600;
+const C_WIDTH = 700;
 
 const LEFT_KEY = 37;
 const RIGHT_KEY = 39;
@@ -50,6 +55,7 @@ function init() {
     loadImages();
     createSnake();
     locateApple();
+    locateFood();
     setTimeout('gameCycle()', DELAY);
 };
 // loads all three images for the game
@@ -62,11 +68,13 @@ function loadImages() {
 
     apple = new Image();
     apple.src = '/assets/images/apple2.png';
+
+    food = new Image();
+    food.src = '/assets/images/apple2.png';
 };
 // create the sneaky snake object and at start has five joints
 function createSnake() {
     dots = 5;
-
     for (let z = 0; z < dots; z++) {
         x[z] = 50;
         y[z] = 50;
@@ -81,12 +89,21 @@ function checkApple() {
         console.log(appleCount)
     };
 };
+function checkFood() {
+    if ((x[0] === food_x) && (y[0] === food_y)) {
+        dots++;
+        locateFood();
+        appleCount++;
+        console.log(appleCount);
+    };
+};
 
 function doDrawing() {
     ctx.clearRect(0, 0, C_WIDTH, C_HEIGHT);
 
     if (inGame) {
         ctx.drawImage(apple, apple_x, apple_y);
+        ctx.drawImage(food, food_x, food_y);
 
         for (let z = 0; z < dots; z++) {
             if (z === 0) {
@@ -166,12 +183,21 @@ function locateApple() {
     r = Math.floor(Math.random() * MAX_RAND);
     apple_y = r * DOT_SIZE;
 };
+// randomly selects coordinates for food object number two
+function locateFood() {
+    let f = Math.floor(Math.random() * MAX_RAND);
+    food_x = f * DOT_SIZE;
+
+    f = Math.floor(Math.random() * MAX_RAND);
+    food_y = f * DOT_SIZE;
+};
 // forms game cycle. provided game isnt finished it preforms
 // detection of collision, do movement and drawing. set timeout calls 
 // recursively 
 function gameCycle() {
     if (inGame) {
         checkApple();
+        checkFood();
         checkColliision();
         move();
         doDrawing();
@@ -203,6 +229,7 @@ function newGameStart() {
     loadImages();
     newSneakySnake();
     locateApple();
+    locateFood();
     setTimeout('gameCycle()', DELAY);
 }
 function newGame() {
@@ -214,7 +241,7 @@ function newGame() {
 }
 // displaying scores
 function updateDisplay() {
-    document.getElementById('appleCount').innerText = 'Apple Score: ' + appleCount;
+    document.getElementById('appleCount').innerText = 'Score Count: ' + appleCount;
 
     if (appleCount > topScore) {
         topScore = appleCount;
@@ -255,15 +282,15 @@ $(function () {
     $('#playerForm').on('submit', (event) => {
         event.preventDefault();
         console.log('form submitted');
-        let gameData = {
-            name: $('#name').val(),
-            score: topScore
-        }
-     let name = $('#name').val();
+        let name = $('#name').val();
 
         if (!name) {
             console.log('please fill out this form')
-            document.getElementById('error').innerText = 'Please fill out your name'
+            document.getElementById('message').innerText = 'Please fill out your name'
+        }
+        else if (name.length < 2 || name.length > 11) {
+            console.log('must have more than 1 charcter and less than 11');
+            document.getElementById('message').innerText = 'Your name must be between 1-10 characters'
         }
         else if (name) {
             let gameData = {
@@ -278,6 +305,7 @@ $(function () {
                 .then((data) => {
                     console.log('name submitted');
                     console.log(data);
+                    document.getElementById('message').innerText = 'Name Submitted!'
                     resetForm();
                 })
                 .catch((err) => {

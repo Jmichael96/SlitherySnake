@@ -17,29 +17,25 @@
         <div class="modal-dialog">
             <!-- Modal content-->
             <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Modal Header</h4>
-                </div>
                 <div class="modal-body">
                     <div class="card">
                         <div class="card-body">
                             <p class="form-title">
-                                Your High Score Is <span id="modalScore"></span>.
+                                Your High Score Is <span id="modalScore">0</span>!
                                 Enter Your Name And Save It!
                             </p>
                             <form action="player" id="playerForm" method="POST">
-                                <input type="text" class="form-control" id="name" name="name" placeholder="Name">
-                                <span id="error"></span>
                                 <div class="row">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <input type="text" class="form-control col-8" id="name" name="name" placeholder="Name">
+                                    <button type="submit" id="nameSubmit" class="btn col-4">Submit</button>
                                 </div>
+                                <span id="message"></span>
                             </form>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button data-dismiss="modal">No Thanks I'm Done</button>
+                    <button id="quitBtn" data-dismiss="modal">No Thanks, I'm Done</button>
                     <div id="newGame"></div>
                 </div>
             </div>
