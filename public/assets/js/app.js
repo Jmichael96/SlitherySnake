@@ -250,3 +250,46 @@ onkeydown = (e) => {
         leftDirection = false;
     }
 }
+// player score and name submission! :D
+$(function () {
+    $('#playerForm').on('submit', (event) => {
+        event.preventDefault();
+        console.log('form submitted');
+        let gameData = {
+            name: $('#name').val(),
+            score: topScore
+        }
+     let name = $('#name').val();
+
+        if (!name) {
+            console.log('please fill out this form')
+            document.getElementById('error').innerText = 'Please fill out your name'
+        }
+        else if (name) {
+            let gameData = {
+                name: $('#name').val(),
+                score: topScore
+            }
+            $.ajax('/player', {
+                method: 'POST',
+                url: '/player',
+                data: gameData
+            })
+                .then((data) => {
+                    console.log('name submitted');
+                    console.log(data);
+                    resetForm();
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        };
+    });
+    function resetForm() {
+        $('#name').val('');
+    };
+});
+
+
+
+
