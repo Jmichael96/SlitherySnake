@@ -1,7 +1,32 @@
-<div class="container">
-    <div class="row d-flex justify-content-center mt-1">
-        <button id="startBtn" onclick="init();" class="btn">Start Game!</button>
-    </div>
+<article class="container">
+    <section id="highScoreSection">
+        <h4 id="highscoreTitle" class="text-center">High Scores!</h4>
+        
+        <div class="d-flex justify-content-center">
+            <table class="table">
+                <thead id="tableHead" class="thead">
+                    <tr>
+                        <th scope="col"><img src="/assets/images/trophy.png" style="height: 20px;" />First</th>
+                        <th scope="col">Second</th>
+                        <th scope="col">Third</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        {{#each players}}
+                        <td>
+                            <div class="row">
+                                <p id="scoreName">{{name}}: </p>
+                                <p id="score"> {{score}}</p>
+                            </div>
+                        </td>
+                        {{/each}}
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
     <div>
         <div class="row d-flex justify-content-center mt-1">
             <div id="scoreCountCard" class="card m-1">
@@ -11,43 +36,42 @@
             </div>
             <div id="highScoreCard" class="card m-1">
                 <div class="card-body">
-                    <span id="highScore">High Score: 0</span>
+                    <span id="highScore">Previous Score: 0</span>
                 </div>
             </div>
         </div>
     </div>
     <div id="snakeWrap" class="row d-flex justify-content-center">
-        {{!-- <div class="col-6"> --}}
         <canvas id="snakeCanvas" width="700" height="600"></canvas>
-        {{!-- </div> --}}
-        {{!-- <div class="col"></div> --}}
+        <button id="startBtn" onclick="startGame();" class="btn">Start Game!</button>
+        <h3 id="timer">3</h3>
+        <p id="loseText">You Lose <img id="loseImg" alt="lose image" src="/assets/images/cry.gif" /></p>
+    </div>
 
-    </div>
-    <p id="highscoreTitle" class="text-center">High Scores!</p>
     <div class="d-flex justify-content-center">
-        <table class="table">
-            <thead id="tableHead" class="thead">
-                <tr>
-                    <th scope="col">First</th>
-                    <th scope="col">Second</th>
-                    <th scope="col">Third</th>
-                    <th scope="col">Fourth</th>
-                    <th scope="col">Fifth</th>
-                    <th scope="col">Sixth</th>
-                    <th scope="col">Seventh</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    {{#each Player}}
-                    <td>
-                        <div class="row">
-                        <p id="scoreName">{{name}}: </p><p id="score"> {{score}}</p>
-                        </div>
-                    </td>
-                    {{/each}}
-                </tr>
-            </tbody>
-        </table>
+        <!-- Button trigger modal -->
+        <button id="statsBtn" type="button" data-toggle="modal" data-target="#statsModal">
+            Stats
+        </button>
     </div>
-</div>
+    <!-- Modal -->
+    <div class="modal fade" id="statsModal" tabindex="-1" role="dialog" aria-labelledby="statsModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="statsModal">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</article>

@@ -6,16 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Snake!</title>
-    <link rel="stylesheet" href="/assets/css/style.css">
+    {{!-- custom css files --}}
+    <link rel="stylesheet" href="/assets/css/style.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
 </head>
 
 <body id='body'>
-    <!-- Modal -->
+    <!-- Modal for when the game ends -->
     <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">
-            <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-body">
                     <div class="card">
@@ -24,7 +24,7 @@
                                 Your High Score Is <span id="modalScore">0</span>!
                                 Enter Your Name And Save It!
                             </p>
-                            <form action="player" id="playerForm" method="POST">
+                            <form action="/add_player" id="playerForm" method="POST">
                                 <div class="row">
                                     <input type="text" class="form-control col-8" id="name" name="name" placeholder="Name">
                                     <button type="submit" id="nameSubmit" class="btn col-4">Submit</button>
@@ -41,10 +41,14 @@
             </div>
         </div>
     </div>
+
     {{{ body }}}
+    {{!-- jquery cdn --}}
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    {{!-- connecting js files --}}
     <script type="text/javascript" src="/assets/js/app.js"></script>
-    <script type="text/javascript" src="/assets/js/post.js"></script>
+    <script type="text/javascript" src="/assets/js/addPlayer.js"></script>
+    {{!-- js bootstrap cdn --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
         crossorigin="anonymous"></script>

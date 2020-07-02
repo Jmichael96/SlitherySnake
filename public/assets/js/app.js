@@ -5,7 +5,6 @@ let head;
 let apple;
 let food;
 let ball;
-console.log('this is connected app.js')
 let dots;
 let apple_x;
 let apple_y;
@@ -43,6 +42,32 @@ const DOWN_KEY = 40;
 let x = new Array(ALL_DOTS);
 let y = new Array(ALL_DOTS);
 
+// start game function for when the user clicks the start button. 
+// it will bring up a timer upon being called
+function startGame() {
+    // locating the start button and setting display = none
+    document.getElementById('startBtn').style.display = 'none';
+    startTimer();
+}
+
+// countdown function 
+function startTimer() {
+    let timeleft = 2;
+    let timeDisplay = document.getElementById('timer');
+    timeDisplay.style.display = 'block';
+    let downloadTimer = setInterval(() => {
+
+        if (timeleft <= 0) {
+            clearInterval(downloadTimer);
+            timeDisplay.style.display = 'none';
+            init();
+        }
+
+        timeDisplay.innerText = timeleft;
+        timeleft -= 1;
+    }, 1000)
+}
+
 // gets reference to the canvas object and its context 
 // inside are functions being called to preform those tasks
 function init() {
@@ -58,6 +83,7 @@ function init() {
     locateFood();
     setTimeout('gameCycle()', DELAY);
 };
+
 // loads all three images for the game
 function loadImages() {
     head = new Image();
@@ -114,7 +140,8 @@ function doDrawing() {
             };
         };
     } else {
-        gameOver();
+        // gameOver();
+        document.getElementById('loseText').style.display = 'block';
     };
 };
 
@@ -123,7 +150,6 @@ function gameOver() {
     ctx.textBaseline = 'middle';
     ctx.textAlign = 'center';
     ctx.font = 'normal bold 18px serif';
-
     ctx.fillText('Game Over :(', C_WIDTH / 2, C_HEIGHT / 2);
 };
 
@@ -212,6 +238,8 @@ function gameCycle() {
         newGame();
     };
 };
+
+// creating a new snake to display when new game is started
 function newSneakySnake() {
     dots = 5;
 
@@ -220,6 +248,8 @@ function newSneakySnake() {
         x[z] = 300;
     };
 };
+
+// call this function to start a new game
 function newGameStart() {
     inGame = true;
     canvas = document.getElementById('snakeCanvas');
@@ -232,11 +262,26 @@ function newGameStart() {
     locateFood();
     setTimeout('gameCycle()', DELAY);
 }
+
 function newGame() {
-    $('#newGame').html(`<button id="newGameBtn" data-dismiss="modal" class="btn" type="submit" >Play Again!</button>`)
+    $('#newGame').html(`<button id="newGameBtn" data-dismiss="modal" class="btn" type="button">Play Again!</button>`)
 
     $('#newGameBtn').on('click', function () {
-        newGameStart();
+        document.getElementById('loseText').style.display = 'none';
+        let timeleft = 2;
+        let timeDisplay = document.getElementById('timer');
+
+        timeDisplay.style.display = 'block';
+        timeDisplay.innerText = '3';
+        let downloadTimer = setInterval(() => {
+            if (timeleft <= 0) {
+                clearInterval(downloadTimer);
+                timeDisplay.style.display = 'none';
+                newGameStart();
+            }
+            timeDisplay.innerText = timeleft;
+            timeleft -= 1;
+        }, 1000)
     });
 }
 // displaying scores
@@ -277,47 +322,3 @@ onkeydown = (e) => {
         leftDirection = false;
     }
 }
-// player score and name submission! :D
-$(function () {
-    $('#playerForm').on('submit', (event) => {
-        event.preventDefault();
-        console.log('form submitted');
-        let name = $('#name').val();
-
-        if (!name) {
-            console.log('please fill out this form')
-            document.getElementById('message').innerText = 'Please fill out your name'
-        }
-        else if (name.length < 2 || name.length > 11) {
-            console.log('must have more than 1 charcter and less than 11');
-            document.getElementById('message').innerText = 'Your name must be between 1-10 characters'
-        }
-        else if (name) {
-            let gameData = {
-                name: $('#name').val(),
-                score: topScore
-            }
-            $.ajax('/player', {
-                method: 'POST',
-                url: '/player',
-                data: gameData
-            })
-                .then((data) => {
-                    console.log('name submitted');
-                    console.log(data);
-                    document.getElementById('message').innerText = 'Name Submitted!'
-                    resetForm();
-                })
-                .catch((err) => {
-                    console.log(err);
-                });
-        };
-    });
-    function resetForm() {
-        $('#name').val('');
-    };
-});
-
-
-
-

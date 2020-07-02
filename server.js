@@ -1,33 +1,23 @@
 const express = require('express');
 const app = express();
-var exprhbs = require('express-handlebars');
-// const logger = require('morgan');
-const mongoose = require('mongoose');
+const exprhbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 8080;
-const keys = require('./keys');
-const methodOverride = require('method-override');
+const connectDB = require('./services/db');
+// const methodOverride = require('method-override');
 const htmlRoutes = require('./Routes/htmlRoutes');
 let player = require('./controllers/player');
 
-// app.use(logger('dev'));
+// * connect to the database!
+connectDB();
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static('public'));
-app.use(methodOverride('X-HTTP-Method-Override'));
+// app.use(methodOverride('X-HTTP-Method-Override'));
 
 app.engine("handlebars", exprhbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
-
-const MONGODB_URI = process.env.MONGODB_URI || keys.DB
-mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
-let db = mongoose.connection;
-db.once('open', () => {
-    console.log('We Have A Connection Muahahah');
-});
-db.on('error', (err) => {
-    console.log('database error... ', err);
-});
 
 app.use(htmlRoutes);
 app.use(player);

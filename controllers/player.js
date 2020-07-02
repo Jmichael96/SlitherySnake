@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const db = require('../models');
 
-router.post('/player', (req, res) => {
+router.post('/add_player', (req, res) => {
     db.Player.create(req.body)
         .then((dbPlayer) => {
             res.json(dbPlayer);
@@ -9,6 +9,9 @@ router.post('/player', (req, res) => {
         })
         .catch((err) => {
             console.log(err);
+            return res.status(500).json({
+                serverMsg: 'Server error'
+            });
         });
 });
 
