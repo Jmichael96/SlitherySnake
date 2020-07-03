@@ -1,6 +1,6 @@
 #body {
-    background-color: rgb(22, 58, 99);
-    background-image: url("/assets/images/bg.jpg");
+    background-color: rgb(1, 27, 58);
+    background-image: url("/assets/images/mainbg.jpg");
     background-position: center;
     background-attachment: fixed;
     background-size: cover;
@@ -32,11 +32,15 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    -webkit-transition: background-color .3s ease-in-out, border .3s ease-in-out;
+    -moz-transition: background-color .3s ease-in-out, border .3s ease-in-out;
+    -o-transition: background-color .3s ease-in-out, border .3s ease-in-out;
+    transition: background-color .3s ease-in-out, border .3s ease-in-out;
 }
 
 #startBtn:hover {
-    background-color: rgb(22, 58, 99);
-    color: white;
+    background-color: rgb(195, 195, 195);
+    color: rgb(0, 0, 0);
 }
 
 /* timer text for game countdown */
@@ -88,6 +92,8 @@
     padding: .5rem;
     font-size: 1.4rem;
     font-weight: 600;
+    border-radius: 2px;
+    box-shadow: 0 1px 5px black;
 }
 
 /* highscore card title */
@@ -204,8 +210,17 @@
 
 #statsBtn {
     display: none;
+    border: 1px solid white;
+    background-color: white;
+    -webkit-transition: background-color .3s ease-in-out, border .3s ease-in-out;
+    -moz-transition: background-color .3s ease-in-out, border .3s ease-in-out;
+    -o-transition: background-color .3s ease-in-out, border .3s ease-in-out;
+    transition: background-color .3s ease-in-out, border .3s ease-in-out;
 }
-
+#statsBtn:hover {
+    background-color: rgb(195, 195, 195);
+    border: 1px solid rgb(195, 195, 195);;
+}
 /* div wrap over each player */
 
 .allWrap {
