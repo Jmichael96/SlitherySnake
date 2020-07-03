@@ -4,7 +4,6 @@ $(function () {
 
         $.ajax('/api/all_players').then((data) => {
             if (data) {
-                console.log(data.allPlayers)
                 renderPlayers.innerHTML = data.allPlayers.map((player, i) => {
                     return (`
                     <div class="allWrap">
