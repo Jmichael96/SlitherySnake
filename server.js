@@ -20,7 +20,7 @@ app.engine("handlebars", exprhbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 app.use(htmlRoutes);
-app.use(player);
+app.use('/api', player);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

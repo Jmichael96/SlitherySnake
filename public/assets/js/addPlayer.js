@@ -22,9 +22,9 @@ $(function () {
             score: topScore
         }
         // sending a post request to the server and saving the game data
-        $.ajax('/add_player', {
+        $.ajax('/api/add_player', {
             method: 'POST',
-            url: '/add_player',
+            url: '/api/add_player',
             data: gameData
         })
             .then((data) => {

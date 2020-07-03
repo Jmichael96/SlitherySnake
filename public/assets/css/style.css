@@ -69,22 +69,25 @@
     height: 50px;
 }
 
-/* style of score count card */
+/* score card section wrap */
 
-#scoreCountCard {
-    width: 200px;
-    font-weight: 700;
-    box-shadow: 0 1px 5px black;
-    background-color: rgb(24, 24, 24);
-    color: white;
+#scoreBoardWrap {
+    margin: 1rem 0 1rem 0;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-content: flex-start;
 }
 
-#highScoreCard {
-    width: 200px;
-    font-weight: 700;
-    box-shadow: 0 1px 5px black;
-    background-color: rgb(24, 24, 24);
+/* each card that holds the scores */
+
+.scoreCard {
+    background-color: black;
     color: white;
+    margin: .5rem;
+    padding: .5rem;
+    font-size: 1.4rem;
+    font-weight: 600;
 }
 
 /* highscore card title */
@@ -96,26 +99,36 @@
     font-size: 25px;
 }
 
-/* style of table head */
+/* inner section wrap of the high score data */
 
-#tableHead {
-    background-color: white;
-    box-shadow: 0 1px 5px black, 0 1px 10px black;
+#innerScoreWrap {
+    background-color: black;
+    height: 3.5rem;
 }
-#tableHead tr {
-    width: 100%;
-    text-align: center;
+
+/* 1st 2nd 3rd style */
+
+.placeHolder {
+    color: white;
+    margin-bottom: 0rem;
 }
+
+/* div around each player text */
+
+.playerWrap {
+    display: flex;
+}
+
 /* style of individual list items for each player in the top 7 */
 
-#scoreName {
+.scoreName {
     font-weight: 700;
     font-size: 17px;
     margin-right: 5px;
     color: white;
 }
 
-#score {
+.score {
     font-weight: 700;
     font-size: 17px;
     color: white;
@@ -193,6 +206,32 @@
     display: none;
 }
 
+/* div wrap over each player */
+
+.allWrap {
+    display: flex;
+}
+
+/* rendered text for all players */
+
+/* placement number */
+
+.allPlace {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-right: .3rem;
+}
+
+/* player name */
+
+.allName {
+    font-size: 1.3rem;
+    font-weight: 200;
+    margin-right: .3rem;
+}
+
+/* ! MEDIA QUERIES */
+
 @media only screen and (max-width: 1366px) {
     #highScoreSection {
         display: none;
@@ -200,5 +239,40 @@
     /* stats button to view player stats for mobile users */
     #statsBtn {
         display: block;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+    /* score card section wrap */
+    #scoreBoardWrap {
+        margin: 0;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-around;
+        align-content: flex-start;
+    }
+    .scoreCard {
+        margin: 0;
+        font-size: .8rem;
+    }
+}
+
+@media only screen and (max-width: 534px) {
+    /* losing text inside canvas */
+    #loseText {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-size: 2rem;
+        display: none;
+    }
+    /* gif image with the losing text */
+    #loseImg {
+        height: 32px;
     }
 }

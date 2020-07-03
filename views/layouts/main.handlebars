@@ -8,6 +8,7 @@
     <title>Snake!</title>
     {{!-- custom css files --}}
     <link rel="stylesheet" href="/assets/css/style.css" />
+    <link rel="stylesheet" href="/assets/css/d-pad.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
 </head>
@@ -24,7 +25,7 @@
                                 Your High Score Is <span id="modalScore">0</span>!
                                 Enter Your Name And Save It!
                             </p>
-                            <form action="/add_player" id="playerForm" method="POST">
+                            <form action="/api/add_player" id="playerForm" method="POST">
                                 <div class="row">
                                     <input type="text" class="form-control col-8" id="name" name="name" placeholder="Name">
                                     <button type="submit" id="nameSubmit" class="btn col-4">Submit</button>
@@ -48,6 +49,7 @@
     {{!-- connecting js files --}}
     <script type="text/javascript" src="/assets/js/app.js"></script>
     <script type="text/javascript" src="/assets/js/addPlayer.js"></script>
+    <script type="text/javascript" src="/assets/js/fetchPlayers.js"></script>
     {{!-- js bootstrap cdn --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"

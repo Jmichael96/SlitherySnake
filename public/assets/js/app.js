@@ -28,7 +28,7 @@ const ALL_DOTS = 900;
 const MAX_RAND = 60;
 const MAX_RAND2 = 50;
 // determines the speed of the game
-const DELAY = 90;
+let DELAY = 120;
 // store size of the canvas
 const C_HEIGHT = 600;
 const C_WIDTH = 700;
@@ -41,6 +41,14 @@ const DOWN_KEY = 40;
 // store the values of arrow keys
 let x = new Array(ALL_DOTS);
 let y = new Array(ALL_DOTS);
+
+// upon load check the inner width to determine some of the game logic
+window.onload = function () {
+    if (window.innerWidth <= 1366) {
+        // change speed of game
+        DELAY = 140
+    }
+}
 
 // start game function for when the user clicks the start button. 
 // it will bring up a timer upon being called
@@ -98,6 +106,7 @@ function loadImages() {
     food = new Image();
     food.src = '/assets/images/food.png';
 };
+
 // create the sneaky snake object and at start has five joints
 function createSnake() {
     dots = 5;
@@ -109,21 +118,20 @@ function createSnake() {
 // checks to see if head collides with the apple and increase the number of joints
 function checkApple() {
     if ((x[0] === apple_x) && (y[0] === apple_y)) {
-        dots++;
+        dots+=2;
         locateApple();
         appleCount++
-        console.log(appleCount)
     };
 };
 function checkFood() {
     if ((x[0] === food_x) && (y[0] === food_y)) {
-        dots++;
+        dots+=2;
         locateFood();
         appleCount++;
-        console.log(appleCount);
     };
 };
 
+// function to render the images to the canvas
 function doDrawing() {
     ctx.clearRect(0, 0, C_WIDTH, C_HEIGHT);
 
@@ -140,18 +148,18 @@ function doDrawing() {
             };
         };
     } else {
-        // gameOver();
         document.getElementById('loseText').style.display = 'block';
     };
 };
 
-function gameOver() {
-    ctx.fillStyle = 'white';
-    ctx.textBaseline = 'middle';
-    ctx.textAlign = 'center';
-    ctx.font = 'normal bold 18px serif';
-    ctx.fillText('Game Over :(', C_WIDTH / 2, C_HEIGHT / 2);
-};
+// ? game over function which is currently not being used
+// function gameOver() {
+//     ctx.fillStyle = 'white';
+//     ctx.textBaseline = 'middle';
+//     ctx.textAlign = 'center';
+//     ctx.font = 'normal bold 18px serif';
+//     ctx.fillText('Game Over :(', C_WIDTH / 2, C_HEIGHT / 2);
+// };
 
 function move() {
     // for loop moves joints of the snake up the chain
@@ -176,6 +184,7 @@ function move() {
         y[0] += DOT_SIZE;
     };
 };
+
 // determines of snake has hit itself or a border
 function checkColliision() {
     // if the snake hits any of its joints the game is over
@@ -201,6 +210,7 @@ function checkColliision() {
         inGame = false;
     }
 };
+
 // randomly selects x and y coordinates for the apple object
 function locateApple() {
     let r = Math.floor(Math.random() * MAX_RAND);
@@ -209,6 +219,7 @@ function locateApple() {
     r = Math.floor(Math.random() * MAX_RAND);
     apple_y = r * DOT_SIZE;
 };
+
 // randomly selects coordinates for food object number two
 function locateFood() {
     let f = Math.floor(Math.random() * MAX_RAND);
@@ -217,6 +228,7 @@ function locateFood() {
     f = Math.floor(Math.random() * MAX_RAND);
     food_y = f * DOT_SIZE;
 };
+
 // forms game cycle. provided game isnt finished it preforms
 // detection of collision, do movement and drawing. set timeout calls 
 // recursively 
@@ -322,3 +334,33 @@ onkeydown = (e) => {
         leftDirection = false;
     }
 }
+
+//  functions for the d-pad when mobile users are using it
+$('#upBtn').on('click', () => {
+    if (!downDirection) {
+        upDirection = true;
+        rightDirection = false;
+        leftDirection = false;
+    }
+});
+$('#downBtn').on('click', () => {
+    if (!upDirection) {
+        downDirection = true;
+        rightDirection = false;
+        leftDirection = false;
+    }
+});
+$('#leftBtn').on('click', () => {
+    if (!rightDirection) {
+        leftDirection = true;
+        upDirection = false;
+        downDirection = false;
+    }
+});
+$('#rightBtn').on('click', () => {
+    if (!leftDirection) {
+        rightDirection = true;
+        upDirection = false;
+        downDirection = false;
+    }
+});

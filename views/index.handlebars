@@ -1,46 +1,48 @@
 <article class="container">
     <section id="highScoreSection">
         <h4 id="highscoreTitle" class="text-center">High Scores!</h4>
-        
-        <div class="d-flex justify-content-center">
-            <table class="table">
-                <thead id="tableHead" class="thead">
-                    <tr>
-                        <th scope="col"><img src="/assets/images/trophy.png" style="height: 20px;" />First</th>
-                        <th scope="col">Second</th>
-                        <th scope="col">Third</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
+        <section id="innerScoreWrap">
+            <div class="row">
+                <div class="col-12">
+                    <div class="row">
+                        <div class="col-4 d-flex justify-content-center">
+                            <p class="placeHolder">1st</p>
+                        </div>
+                        <div class="col-4 d-flex justify-content-center">
+                            <p class="placeHolder">2st</p>
+                        </div>
+                        <div class="col-4 d-flex justify-content-center">
+                            <p class="placeHolder">3st</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="row">
                         {{#each players}}
-                        <td>
-                            <div class="row">
-                                <p id="scoreName">{{name}}: </p>
-                                <p id="score"> {{score}}</p>
+                        <div class="col-4 d-flex justify-content-center">
+                            <div class="playerWrap">
+                                <p class="scoreName">{{name}}: </p>
+                                <p class="score"> {{score}}</p>
                             </div>
-                        </td>
+                        </div>
                         {{/each}}
-                    </tr>
-                </tbody>
-            </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    {{!-- score board section --}}
+    <section id="scoreBoardWrap">
+        <div class="scoreCard">
+            <span id="appleCount">Score Count: 0</span>
+        </div>
+        <div class="scoreCard">
+            <span id="highScore">Previous Score: 0</span>
         </div>
     </section>
 
-    <div>
-        <div class="row d-flex justify-content-center mt-1">
-            <div id="scoreCountCard" class="card m-1">
-                <div class="card-body">
-                    <span id="appleCount">Score Count: 0</span>
-                </div>
-            </div>
-            <div id="highScoreCard" class="card m-1">
-                <div class="card-body">
-                    <span id="highScore">Previous Score: 0</span>
-                </div>
-            </div>
-        </div>
-    </div>
+    {{!-- game center where the magic happens --}}
     <div id="snakeWrap" class="row d-flex justify-content-center">
         <canvas id="snakeCanvas" width="700" height="600"></canvas>
         <button id="startBtn" onclick="startGame();" class="btn">Start Game!</button>
@@ -48,28 +50,37 @@
         <p id="loseText">You Lose <img id="loseImg" alt="lose image" src="/assets/images/cry.gif" /></p>
     </div>
 
+    {{!-- D-PAD for when on a mobile device --}}
+    <section id="dPadWrap">
+        <nav class="d-pad">
+            <a id="upBtn" class="up" href="#"></a>
+            <a id="rightBtn" class="right" href="#"></a>
+            <a id="downBtn" class="down" href="#"></a>
+            <a id="leftBtn" class="left" href="#"></a>
+        </nav>
+    </section>
+
+    {{!-- button to view the score stats --}}
     <div class="d-flex justify-content-center">
         <!-- Button trigger modal -->
         <button id="statsBtn" type="button" data-toggle="modal" data-target="#statsModal">
-            Stats
+            View Stats
         </button>
     </div>
+
     <!-- Modal -->
     <div class="modal fade" id="statsModal" tabindex="-1" role="dialog" aria-labelledby="statsModal" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="statsModal">Modal title</h5>
+                    <h5 class="modal-title" id="statsModal">Score Stats</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    ...
-                </div>
+                <span id="allPlayers"></span>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
             </div>
         </div>
