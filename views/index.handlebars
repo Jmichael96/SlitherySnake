@@ -43,13 +43,15 @@
     </section>
 
     {{!-- game center where the magic happens --}}
-    <div id="snakeWrap" class="row d-flex justify-content-center">
-        <canvas id="snakeCanvas" width="700" height="600"></canvas>
-        <button id="startBtn" onclick="startGame();" class="btn">Start Game!</button>
-        <h3 id="timer">3</h3>
-        <p id="loseText">You Lose <img id="loseImg" alt="lose image" src="/assets/images/cry.gif" /></p>
+    <div class="row d-flex justify-content-center">
+        <div id="snakeWrap" class="row d-flex justify-content-center">
+            <canvas id="snakeCanvas" width="700" height="600"></canvas>
+            <button id="startBtn" onclick="startGame();" class="btn">Start Game!</button>
+            <h3 id="timer">3</h3>
+            <p id="loseText">You Lose <img id="loseImg" alt="lose image" src="/assets/images/cry.gif" /></p>
+        </div>
     </div>
-
+    
     {{!-- D-PAD for when on a mobile device --}}
     <section id="dPadWrap">
         <nav class="d-pad">

@@ -260,12 +260,29 @@
         display: block;
     }
 }
+@media only screen and (max-width: 800px) {
+    #dPadWrap {
+        margin-top: 2.5rem;
+    }
+}
+
 @media only screen and (max-width: 700px) {
     #dPadWrap {
-        margin-top: 0;
+        margin-top: 2.5rem;
         display: flex;
         flex-flow: row wrap;
         justify-content: center;
         align-content: flex-start;
     }    
+}
+@media only screen and (max-width: 615px) {
+    #dPadWrap {
+        margin-top: 4rem;
+    }
+}
+
+@media only screen and (max-width: 460px) {
+    #dPadWrap {
+        margin-top: 4.5rem;
+    }
 }
